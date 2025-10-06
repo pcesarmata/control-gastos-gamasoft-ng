@@ -1,0 +1,22 @@
+<p-toolbar>
+  <div class="p-toolbar-group-left">
+    <h3 class="m-0">Ingresos</h3>
+  </div>
+</p-toolbar>
+
+<p-table [value]="rows" [paginator]="true" [rows]="10" [loading]="loading">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Fecha</th>
+      <th>Origen</th>
+      <th>Monto</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-row>
+    <tr>
+      <td>{{ row.fecha | date:'yyyy-MM-dd' }}</td>
+      <td>{{ row.origen }}</td>
+      <td>{{ row.monto | currency }}</td>
+    </tr>
+  </ng-template>
+</p-table>

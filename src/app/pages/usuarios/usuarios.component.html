@@ -1,0 +1,52 @@
+<div class="card">
+  <p-toolbar>
+    <div class="p-toolbar-group-left">
+      <button pButton label="Nuevo Usuario" icon="pi pi-plus" (click)="openNew()"></button>
+    </div>
+  </p-toolbar>
+
+  <p-table [value]="usuarios" dataKey="id" [paginator]="true" [rows]="10" responsiveLayout="scroll">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Nombre</th>
+        <th>Email</th>
+        <th>Activo</th>
+        <th>Roles</th>
+        <th>Acciones</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user>
+      <tr>
+        <td>{{ user.nombre }}</td>
+        <td>{{ user.email }}</td>
+        <td><p-tag [value]="user.enabled ? 'Sí' : 'No'" [severity]="user.enabled ? 'success' : 'danger'"></p-tag></td>
+        <td><span *ngFor="let r of user.roles" class="p-tag p-mr-2">{{ r }}</span></td>
+        <td class="flex gap-2">
+          <button pButton icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="editUsuario(user)"></button>
+          <button pButton icon="pi pi-trash" class="p-button-rounded p-button-danger p-button-text" (click)="deleteUsuario(user)"></button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+<p-dialog header="{{ nuevo ? 'Nuevo Usuario' : 'Editar Usuario' }}" [(visible)]="usuarioDialog" [modal]="true" [style]="{width: '460px'}">
+  <div class="p-fluid">
+    <div class="field">
+      <label for="nombre">Nombre</label>
+      <input id="nombre" type="text" pInputText [(ngModel)]="usuario.nombre" />
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" pInputText [(ngModel)]="usuario.email" />
+    </div>
+    <div class="field">
+      <label for="enabled">Activo</label>
+      <p-checkbox binary="true" [(ngModel)]="usuario.enabled"></p-checkbox>
+    </div>
+  </div>
+  <ng-template pTemplate="footer">
+    <button pButton label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="usuarioDialog=false"></button>
+    <button pButton label="Guardar" icon="pi pi-check" (click)="saveUsuario()" [disabled]="!usuario.email || !usuario.nombre"></button>
+  </ng-template>
+</p-dialog>

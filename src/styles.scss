@@ -1,0 +1,40 @@
+/* Estilo base tipo Sakai adaptado (usando Lara theme) */
+body, .p-component { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+/* Topbar fijo arriba */
+/* Topbar fijo arriba */
+.layout-topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  padding: 0 1rem;
+  background: var(--surface-900);
+  color: var(--surface-0);
+  z-index: 1000; /* siempre por encima del sidebar */
+}
+/* Contenido desplazado */
+.layout-content {
+  margin-left: 260px; /* deja espacio al costado del sidebar */
+  margin-top: 4rem;   /* deja espacio para el topbar */
+  padding: 1rem;
+}
+/* Sidebar fijo en la izquierda */
+.layout-sidebar {
+  width: 260px;
+  position: fixed;
+  top: 4rem;              /* empieza debajo del topbar */
+  left: 0;
+  height: calc(100% - 4rem);  /* ocupa el alto restante */
+  z-index: 900;           /* debajo del topbar */
+  background: var(--surface-0);
+  border-right: 1px solid var(--surface-200);
+  padding-top: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.app-title { font-weight: 600; }
+a { color: inherit; text-decoration: none; }
+a.active { font-weight: 600; }
